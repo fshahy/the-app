@@ -1,9 +1,12 @@
 package com.fshahy.app.orders.resources;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fshahy.app.orders.dto.SaleOrderDto;
 import com.fshahy.app.orders.dto.SaleOrderLineDto;
+import com.fshahy.app.orders.http.SaleOrderLineResponse;
+import com.fshahy.app.orders.http.SaleOrderResponse;
 import com.fshahy.app.orders.repositories.SaleOrderRepository;
 
 import jakarta.inject.Inject;
@@ -41,15 +44,16 @@ public class SaleOrderResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public SaleOrderDto getById(@PathParam("id") Long id) {
+    public SaleOrderResponse getById(@PathParam("id") long id) {
         SaleOrderDto saleOrderDto = saleOrders.findById(id);
-        return saleOrderDto;
+        SaleOrderResponse res = new SaleOrderResponse(saleOrderDto);
+        return res;
     }
 
     @Path("{id}")
     @DELETE
     @Transactional
-    public Response delete(@PathParam("id") Long id) {
+    public Response delete(@PathParam("id") long id) {
         saleOrders.delete(id);
         return Response.status(204).build();
     }
@@ -58,7 +62,7 @@ public class SaleOrderResource {
     @Path("{orderId}/lines")
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createOrderLine(@PathParam("orderIf") Long orderId, SaleOrderLineDto lineDto) {
+    public Response createOrderLine(@PathParam("orderIf") long orderId, SaleOrderLineDto lineDto) {
         saleOrders.saveLine(lineDto);
         return Response.status(201).build();
         
@@ -67,8 +71,11 @@ public class SaleOrderResource {
     @GET
     @Path("{orderId}/lines")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<SaleOrderLineDto> getOrderLines(@PathParam("orderId") Long orderId) {
-        return saleOrders.findOrderLines(orderId);
+    public List<SaleOrderLineResponse> getOrderLines(@PathParam("orderId") long orderId) {
+        return saleOrders.findOrderLines(orderId)
+                    .stream()
+                    .map(dto -> new SaleOrderLineResponse(dto))
+                    .collect(Collectors.toUnmodifiableList());
     }
 
 }

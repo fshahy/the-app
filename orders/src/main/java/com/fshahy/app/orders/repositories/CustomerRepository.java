@@ -35,4 +35,9 @@ public class CustomerRepository {
                 .map(customer -> this.modelMapper.map(customer, CustomerDto.class))
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    public CustomerDto findById(long id) {
+        Customer customer = entityManager.find(Customer.class, id);
+        return this.modelMapper.map(customer, CustomerDto.class);
+    }
 }

@@ -40,7 +40,7 @@ public class SaleOrderRepository {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public SaleOrderDto findById(Long id) {
+    public SaleOrderDto findById(long id) {
         SaleOrder so = entityManager.find(SaleOrder.class, id);
         if (so != null) {
             return this.modelMapper.map(so, SaleOrderDto.class);
@@ -49,7 +49,7 @@ public class SaleOrderRepository {
         return null;
     }
 
-    public boolean delete(Long id) {
+    public boolean delete(long id) {
         SaleOrder so = entityManager.find(SaleOrder.class, id);
         if (so != null) {
             entityManager.remove(so);
@@ -58,7 +58,7 @@ public class SaleOrderRepository {
         return false;
     }
 
-    public List<SaleOrderLineDto> findOrderLines(Long id) {
+    public List<SaleOrderLineDto> findOrderLines(long id) {
         SaleOrder so = entityManager.find(SaleOrder.class, id);
         if (so != null) {
             return so.getLines()

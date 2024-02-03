@@ -1,7 +1,6 @@
 package com.fshahy.app.orders.repositories;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -37,6 +36,11 @@ public class ProductRepository {
                 .getResultStream()
                 .map(product -> this.modelMapper.map(product,ProductDto.class))
                 .collect(Collectors.toList());
+    }
+
+    public ProductDto findbyId(long id) {
+        Product product = entityManager.find(Product.class, id);
+        return this.modelMapper.map(product, ProductDto.class);
     }
 
 }
