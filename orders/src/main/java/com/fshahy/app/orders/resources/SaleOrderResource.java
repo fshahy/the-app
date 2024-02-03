@@ -37,8 +37,11 @@ public class SaleOrderResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<SaleOrderDto> getAll() {
-        return saleOrders.getAll();
+    public List<SaleOrderResponse> getAll() {
+        return saleOrders.getAll()
+                    .stream()
+                    .map(dto -> new SaleOrderResponse(dto))
+                    .collect(Collectors.toUnmodifiableList());
     }
 
     @GET
@@ -76,6 +79,18 @@ public class SaleOrderResource {
                     .stream()
                     .map(dto -> new SaleOrderLineResponse(dto))
                     .collect(Collectors.toUnmodifiableList());
+    }
+
+    @GET
+    @Path("{orderId}/lines/{lineId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public SaleOrderLineResponse getOrderLines(@PathParam("orderId") long orderId, @PathParam("lineId") long lineId) {
+        return saleOrders.findOrderLines(orderId)
+                .stream()
+                .filter(lineDto -> lineDto.getId() == lineId)
+                .map(dto -> new SaleOrderLineResponse(dto))
+                .findFirst()
+                .orElse(null);
     }
 
 }
