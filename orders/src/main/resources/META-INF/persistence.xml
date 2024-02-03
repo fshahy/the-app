@@ -14,7 +14,7 @@
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.column_ordering_strategy" value="legacy"/>
-            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
+            <!-- <property name="hibernate.enable_lazy_load_no_trans" value="true"/> -->
             <!-- <property name="jakarta.persistence.sql-load-script-source" value="META-INF/init_script.sql"/> -->
         </properties>
     </persistence-unit>
