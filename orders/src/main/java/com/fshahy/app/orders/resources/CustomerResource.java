@@ -1,10 +1,10 @@
 package com.fshahy.app.orders.resources;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.fshahy.app.orders.dto.CustomerDto;
+import java.util.List;
+
 import com.fshahy.app.orders.http.CustomerResponse;
+import com.fshahy.app.orders.models.Customer;
 import com.fshahy.app.orders.repositories.CustomerRepository;
 
 import jakarta.inject.Inject;
@@ -16,6 +16,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import java.util.stream.Collectors;
 
 @Path("customers")
 public class CustomerResource {
@@ -38,7 +39,7 @@ public class CustomerResource {
     public List<CustomerResponse> getAll() {
         return customers.getAll()
                     .stream()
-                    .map(dto -> new CustomerResponse(dto))
+                    .map(c -> new CustomerResponse(c))
                     .collect(Collectors.toUnmodifiableList());
     }
 
@@ -46,8 +47,8 @@ public class CustomerResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public CustomerResponse getById(@PathParam("id") long id) {
-        CustomerDto dto = customers.findById(id);
-        CustomerResponse res = new CustomerResponse(dto);
+        CustomerDto customerDto = customers.findById(id);
+        CustomerResponse res = new CustomerResponse(customerDto);
         return res;
     }
 

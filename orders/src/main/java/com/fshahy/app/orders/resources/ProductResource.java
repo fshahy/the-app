@@ -1,10 +1,11 @@
 package com.fshahy.app.orders.resources;
 
+import com.fshahy.app.orders.dto.ProductDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.fshahy.app.orders.dto.ProductDto;
 import com.fshahy.app.orders.http.ProductReponse;
+import com.fshahy.app.orders.models.Product;
 import com.fshahy.app.orders.repositories.ProductRepository;
 
 import jakarta.inject.Inject;
@@ -19,7 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 
 @Path("products")
 public class ProductResource {
-
+    
     @Inject
     private ProductRepository products;
 
@@ -38,7 +39,7 @@ public class ProductResource {
     public List<ProductReponse> getAll() {
         return products.getAll()
                         .stream()
-                        .map(dto -> new ProductReponse(dto))
+                        .map(p -> new ProductReponse(p))
                         .collect(Collectors.toUnmodifiableList());
     }
 
@@ -50,5 +51,4 @@ public class ProductResource {
         ProductReponse res = new ProductReponse(productDto);
         return res;
     }
-
 }

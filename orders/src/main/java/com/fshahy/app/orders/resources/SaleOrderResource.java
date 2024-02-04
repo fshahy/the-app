@@ -1,12 +1,14 @@
 package com.fshahy.app.orders.resources;
 
+import com.fshahy.app.orders.dto.SaleOrderDto;
+import com.fshahy.app.orders.dto.SaleOrderLineDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.fshahy.app.orders.dto.SaleOrderDto;
-import com.fshahy.app.orders.dto.SaleOrderLineDto;
 import com.fshahy.app.orders.http.SaleOrderLineResponse;
 import com.fshahy.app.orders.http.SaleOrderResponse;
+import com.fshahy.app.orders.models.SaleOrder;
+import com.fshahy.app.orders.models.SaleOrderLine;
 import com.fshahy.app.orders.repositories.SaleOrderRepository;
 
 import jakarta.inject.Inject;
@@ -65,8 +67,8 @@ public class SaleOrderResource {
     @Path("{orderId}/lines")
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createOrderLine(@PathParam("orderIf") long orderId, SaleOrderLineDto lineDto) {
-        saleOrders.saveLine(lineDto);
+    public Response createOrderLine(@PathParam("orderId") long orderId, SaleOrderLineDto solDto) {
+        saleOrders.saveLine(orderId, solDto);
         return Response.status(201).build();
         
     }

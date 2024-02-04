@@ -1,7 +1,5 @@
 package com.fshahy.app.orders.models;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.util.Date;
 
 @Entity
 @Table(name = "sale_order_line")
@@ -29,7 +28,9 @@ public class SaleOrderLine {
     private SaleOrder order;
 
     @Temporal(TemporalType.DATE)
-    private LocalDate created;
+    private Date created;
+    
+    public SaleOrderLine() {}
 
     public long getId() {
         return id;
@@ -43,11 +44,11 @@ public class SaleOrderLine {
         return product;
     }
 
-    public void setProduct(Product productId) {
-        this.product = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public SaleOrder getOrderId() {
+    public SaleOrder getOrder() {
         return order;
     }
 
@@ -55,12 +56,14 @@ public class SaleOrderLine {
         this.order = order;
     }
 
-    public LocalDate getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDate created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
+
+
     
 }

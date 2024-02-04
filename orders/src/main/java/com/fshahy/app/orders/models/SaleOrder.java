@@ -1,6 +1,5 @@
 package com.fshahy.app.orders.models;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -15,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.util.Date;
 
 @Entity
 @Table(name = "sale_orders")
@@ -34,7 +34,9 @@ public class SaleOrder {
     private List<SaleOrderLine> lines;
 
     @Temporal(TemporalType.DATE)
-    private LocalDate created;
+    private Date created;
+    
+    public SaleOrder() {}
 
     public long getId() {
         return id;
@@ -52,11 +54,11 @@ public class SaleOrder {
         this.customer = customerId;
     }
 
-    public LocalDate getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDate created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

@@ -28,6 +28,8 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<SaleOrder> saleOrders;
+    
+    public Customer() {}
 
     public long getId() {
         return id;

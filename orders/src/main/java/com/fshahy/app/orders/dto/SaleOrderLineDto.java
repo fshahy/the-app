@@ -1,13 +1,21 @@
 package com.fshahy.app.orders.dto;
 
-import java.time.LocalDate;
+import jakarta.json.bind.annotation.JsonbProperty;
+import java.util.Date;
 
 public class SaleOrderLineDto {
-
+    
     private long id;
-    private ProductDto product;
-    private SaleOrderDto saleOrder;
-    private LocalDate created;
+    
+    @JsonbProperty("product_id")
+    private long productId;
+    
+    @JsonbProperty("order_id")
+    private long orderId;
+    
+    private Date created;
+    
+    public SaleOrderLineDto() {}
 
     public long getId() {
         return id;
@@ -17,28 +25,28 @@ public class SaleOrderLineDto {
         this.id = id;
     }
 
-    public ProductDto getProduct() {
-        return product;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setProduct(ProductDto product) {
-        this.product = product;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
-    public SaleOrderDto getSaleOrder() {
-        return saleOrder;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setSaleOrder(SaleOrderDto saleOrder) {
-        this.saleOrder = saleOrder;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
-    public LocalDate getCreated() {
+    public Date getCreated() {
         return created;
     }
-    
-    public void setCreated(LocalDate created) {
+
+    public void setCreated(Date created) {
         this.created = created;
     }
-
+    
 }

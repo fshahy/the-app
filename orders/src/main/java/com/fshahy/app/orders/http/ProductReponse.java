@@ -1,6 +1,7 @@
 package com.fshahy.app.orders.http;
 
 import com.fshahy.app.orders.dto.ProductDto;
+import com.fshahy.app.orders.models.Product;
 
 public class ProductReponse {
 

@@ -22,6 +22,8 @@ public class Product {
 
     @Column(name = "product_name")
     private String name;
+    
+    public Product() {}
 
     public long getId() {
         return id;

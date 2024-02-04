@@ -1,11 +1,9 @@
 package com.fshahy.app.orders.mapper;
 
-import java.io.Serializable;
-
-import org.modelmapper.ModelMapper;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
+import java.io.Serializable;
+import org.modelmapper.ModelMapper;
 
 @ApplicationScoped
 public class Mapper implements Serializable {
